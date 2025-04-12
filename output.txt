@@ -1,0 +1,53 @@
+Dat Hoang Tien 
+AI ENGINEER 
++84 786 281 20 2 | dath66017@gmail.com | Dong Nai, Viet Nam  | linkedin.com/in/dathoangtien2101 
+ 
+PROFILE SUMMARY 
+ 
+I am a graduate student at University of Information Technology (UIT), major in Computer 
+Science. In my senior year, I completed a 6-month internship at FPT AI Center (AIC) under 
+FPT Software, specializing in Natural Language Processing (NLP), including Semantic 
+Search, Large Language Models (LLMs) as well as databases and API. Additionally, have 
+a solid understanding of Genetic Algorithms/Reinforcement Learning from university 
+studies. With such background, I am passionate about leveraging AI to solve real -world 
+problems and reach higher educational/professional accomplishment in AI. 
+ 
+SKILLS 
+ 
+Professional Skills:  Data Analysis | Genetic Algorithm 
+Reinforcement Learning | Natural Language Processing | English | Japanese 
+Technical Skills: Python | Github | Docker |  SQL | Torch | TensorFlow | JAX | 
+ 
+ 
+ 
+  
+WORK EXPERIENCE 
+ 
+AI Engineer internship at FPT AI Center (AIC) :            Aug 2023 – Feb 2024 
+• Developed a web-base system capable of searching for IT solutions through text by 
+using Semantic Search  
+•  Implemented a sophisticated pipeline utilizing MongoDB, FastAPI,  
+ElasticSearch… 
+Student at University of Information Technology:          Sep 2021 – Feb 2025 
+• Studied Natural Language Processing , Reinforcement Learning , Genetic 
+Algorithm as specialize subjects  
+• Implement algorithms for final projects such as: 
+o “Hierarchical Deep Reinforcement Learning” (RL) 
+o ”GPS - Genetic Prompt Search for Efficient Few-Shot Learning” (NLP, GA) 
+o “Deep Deterministic Policy Gradient” (RL) 
+ 
+ACHIEVEMENTS 
+ 
+• IELTS Certification band 7.0 overall (2019) 
+• JLPT Certification N4 (2024) 
+• GPA: 8.26/10 (bachelor’s degree in computer science) 
+• 2700$ scholarship from Lane Community College (USA) in 2020 
+ 
+ 
+EDUCATION • Graduated student at University of Information Technology 
+(HCM-UIT) 
+o 3.5 year Computer Science (AI oriented) major program, GPA: 
+8.26/10 
+o Mainly focus in Machine Learning, Natural Language 
+Processing, Reinforcement Learning and Genetic Algorithms 
+o Side subjects: Recommendation System, Computer Graphic 

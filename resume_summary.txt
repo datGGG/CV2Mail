@@ -1,0 +1,17 @@
+**Resume Summary:**
+
+Dat Hoang Tien is a graduate student at the University of Information Technology (UIT) majoring in Computer Science with a focus on AI. He has a 6-month internship experience at FPT AI Center (AIC) where he specialized in NLP, including Semantic Search and LLMs. He also possesses a strong understanding of Genetic Algorithms and Reinforcement Learning. He has experience in developing web-based systems using Semantic Search and implementing pipelines using MongoDB, FastAPI, and ElasticSearch. He is skilled in Python, Github, Docker, SQL, Torch, TensorFlow, and JAX. He also has certifications in IELTS (7.0) and JLPT (N4).
+
+**Extracted Information:**
+
+*   **Name:** Dat Hoang Tien
+*   **Job Position:** AI Engineer
+*   **Skills:**
+    *   **Professional Skills:** Data Analysis, Genetic Algorithm, Reinforcement Learning, Natural Language Processing, English, Japanese
+    *   **Technical Skills:** Python, Github, Docker, SQL, Torch, TensorFlow, JAX
+*   **Experience:**
+    *   AI Engineer internship at FPT AI Center (AIC) (Aug 2023 – Feb 2024)
+    *   Student at University of Information Technology (Sep 2021 – Feb 2025)
+*   **Year of experience:** Approximately 6 months (internship)
+*   **Education:** Graduated student at University of Information Technology (HCM-UIT), Computer Science (AI oriented) major program
+*   **Location:** Dong Nai, Viet Nam
