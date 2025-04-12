@@ -85,7 +85,7 @@ class CV_text_extractor:
 
         if extension == ".pdf":
             text = self.extract_text_from_pdf(file_path)
-            if not text.strip(): #if no text was extracted, it might be an image pdf.
+            if not text.strip():
               text = self.extract_text_from_image_pdf(file_path)
             return text
         elif extension == ".doc":
@@ -246,7 +246,8 @@ class Email_generator:
             print(f"Error generating email: {e}")
             return None
         
-    def save_generated_output(self,summarized_resume=None, filepath="email.txt",api_key=None):
-        email = self.generate_email_with_gemini(summarized_resume=summarized_resume,api_key=api_key)
+    def save_generated_output(self,summarized_resume=None, filepath="email.txt",api_key=None,response=None):
+        if not response:
+            response = self.generate_email_with_gemini(summarized_resume=summarized_resume,api_key=api_key)
         saver = CV_text_extractor()
-        saver.save_text_to_file(email,filepath)
+        saver.save_text_to_file(response,filepath)

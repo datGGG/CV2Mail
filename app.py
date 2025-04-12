@@ -1,19 +1,22 @@
 import streamlit as st
 from supabase import create_client, Client
 from dotenv import load_dotenv
-# from tools import *
+from tools import *
 import os
 import base64
 
 
 load_dotenv()
+api_key=os.getenv("GOOGLE_API_KEY")
+upload_cv=os.getenv("CV_FROM_USER")
 supabase_url = os.getenv("SUPABASE_URL")
 supabase_key = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(supabase_url, supabase_key)
 
+
 def download_text(text, filename="downloaded_text.txt"):
     """Creates a download link for the given text."""
-    b64 = base64.b64encode(text.encode()).decode()  # Encode to base64
+    b64 = base64.b64encode(text.encode()).decode() 
     href = f'<a href="data:file/txt;base64,{b64}" download="{filename}">Download text file</a>'
     return href
 
@@ -59,7 +62,19 @@ def text_editor(text=None):
     if st.button("Clear"):
       st.session_state.text_content = ""
       st.rerun()
-
+def process_audio_user(uploaded_files):
+    if not uploaded_files:
+        return
+    if not os.path.exists(upload_cv):
+        os.makedirs(upload_cv)
+        print("Created audio_from_user folder")
+    st.write("File uploaded:", uploaded_files.name)
+    # Save file to audio_from_user folder
+    with open(os.path.join(upload_cv, uploaded_files.name), "wb") as f:
+        f.write(uploaded_files.getbuffer())
+    file_dir = os.path.join(upload_cv, uploaded_files.name)
+    return file_dir
+    
 def main_app(user_email):
     
     st.title("🎉 Welcome Page")
@@ -67,9 +82,8 @@ def main_app(user_email):
     if st.button("Logout"):
         sign_out()
     st.header("Import your CV here!")
-    uploaded_files = st.file_uploader("Upload PDF, DOCX, or DOC files", type=["pdf", "docx", "doc"], accept_multiple_files=False)
-    
-    option = st.selectbox(
+    uploaded_file = st.file_uploader("Upload PDF, DOCX, or DOC files", type=["pdf", "docx", "doc"], accept_multiple_files=False)
+    tone = st.selectbox(
     "Which tone would you like to use?",
     ("Formal and Professional",
      "Friendly and Approachable",
@@ -77,8 +91,22 @@ def main_app(user_email):
      "Warm and Conversational",
      "Short and Punchy"),
     placeholder="Select writing tone")
-    initial_text = "olau"
-    edited_text = st.text_area("Edit the text:", initial_text, height=200)
+    previous_mail =""
+    initial_text =""
+    if uploaded_file:
+        file_dir=process_audio_user(uploaded_file)
+        txt_extractor = CV_text_extractor()
+            
+        text = txt_extractor.convert_file_to_text(file_dir)
+        txt_extractor.save_text_to_file(text)
+        
+        summarizer =Txt_summarizer(api_key=api_key)
+        sumarized_CV = summarizer.process_resume(file_dir, api_key)
+        generator = Email_generator(tone=tone,previous_email=previous_mail)
+        email = generator.generate_email_with_gemini(sumarized_CV,api_key=api_key)
+        generator.save_generated_output(sumarized_CV,api_key=api_key,response=email)
+        initial_text = email
+    edited_text = st.text_area("Generated Email:", initial_text, height=200)
     if edited_text:
         st.markdown(download_text(edited_text), unsafe_allow_html=True)
 
