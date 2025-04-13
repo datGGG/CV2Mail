@@ -210,7 +210,7 @@ class Email_generator:
     def __init__(self,tone,previous_email):
         self.tone = tone
         self.previous_email = previous_email
-      
+        self.cache = {}
     def generate_email_with_gemini(self, summarized_resume=None, api_key=None):
         """
         Generates an email using the Gemini API, incorporating tone and style from previous emails.
@@ -227,11 +227,13 @@ class Email_generator:
 
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-2.0-flash')
-
+        if summarized_resume in self.cache:
+                    print("Retrieving mail from cache.")
+                    return self.cache[summarized_resume]
         full_prompt = f"You are a recruiter consultant, from a summarize resume,\
             you need no write an email to the recruit manager about the candidate. \
             Here is the candidate's resume:\n\n{summarized_resume}"
-        print(full_prompt)
+            
         if self.tone:
             full_prompt += f"\n\nWrite in a {self.tone} tone."
 
@@ -241,6 +243,7 @@ class Email_generator:
         try:
             
             response = model.generate_content(full_prompt)
+            self.cache[summarized_resume] = response
             return response.text
         except Exception as e:
             print(f"Error generating email: {e}")

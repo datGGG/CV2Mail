@@ -1,7 +1,7 @@
 import streamlit as st
 from supabase import create_client, Client
 from dotenv import load_dotenv
-from tools import *
+from utils import *
 import os
 import base64
 
@@ -41,35 +41,15 @@ def sign_out():
         st.rerun()
     except Exception as e:
         st.error(f"Logout failed: {e}")
-def text_editor(text=None):
-    """Implements a simple text editor using Streamlit."""
 
-    st.title("Simple Text Editor")
-
-    # Initialize session state for text content if it doesn't exist
-    if "text_content" not in st.session_state:
-        st.session_state.text_content = "implement"
-
-    text_input = st.text_area("Enter your text:", value=st.session_state.text_content, height=300)
-
-    if st.button("Save Changes"):
-        st.session_state.text_content = text_input
-        st.success("Changes saved!")
-
-    st.write("Preview:")
-    st.write(st.session_state.text_content)
-
-    if st.button("Clear"):
-      st.session_state.text_content = ""
-      st.rerun()
-def process_audio_user(uploaded_files):
+def process_user_inp(uploaded_files):
     if not uploaded_files:
         return
     if not os.path.exists(upload_cv):
         os.makedirs(upload_cv)
-        print("Created audio_from_user folder")
+        print("Created user_inp folder")
     st.write("File uploaded:", uploaded_files.name)
-    # Save file to audio_from_user folder
+    # Save file to user_inp folder
     with open(os.path.join(upload_cv, uploaded_files.name), "wb") as f:
         f.write(uploaded_files.getbuffer())
     file_dir = os.path.join(upload_cv, uploaded_files.name)
@@ -94,7 +74,7 @@ def main_app(user_email):
     previous_mail =""
     initial_text =""
     if uploaded_file:
-        file_dir=process_audio_user(uploaded_file)
+        file_dir=process_user_inp(uploaded_file)
         txt_extractor = CV_text_extractor()
             
         text = txt_extractor.convert_file_to_text(file_dir)
@@ -102,8 +82,10 @@ def main_app(user_email):
         
         summarizer =Txt_summarizer(api_key=api_key)
         sumarized_CV = summarizer.process_resume(file_dir, api_key)
+        
         generator = Email_generator(tone=tone,previous_email=previous_mail)
         email = generator.generate_email_with_gemini(sumarized_CV,api_key=api_key)
+        
         generator.save_generated_output(sumarized_CV,api_key=api_key,response=email)
         initial_text = email
     edited_text = st.text_area("Generated Email:", initial_text, height=200)
