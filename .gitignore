@@ -176,4 +176,4 @@ cython_debug/
 #output file
 email.txt
 output.txt
-resume_sumary.txt
+resume_summary.txt
